@@ -7,6 +7,7 @@ Building a LINE Chatbot for user chatting with a PDF, Image, Video, and Audio fi
 * Create a Firebase project using the [Firebase Console](https://console.firebase.google.com) and select <b>Blaze plan</b>
 * Create an API key from [Google AI Studio](https://aistudio.google.com/app/apikey)
 
+## Getting Started
 Copy credentials and set them in Environment variable (.env)
 ```
 CHANNEL_ACCESS_TOKEN=CHANNEL-ACCESS-TOKEN-OF-LINE-MESSAGING-API
