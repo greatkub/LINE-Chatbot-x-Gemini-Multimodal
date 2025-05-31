@@ -8,7 +8,7 @@ Building a LINE Chatbot for user chatting with a PDF, Image, Video, and Audio fi
 * Create an API key from [Google AI Studio](https://aistudio.google.com/app/apikey)
 
 ## Environment variables
-Copy credentials and set them in a .env file
+Copy credentials and set them in a `.env` file in the `functions` directory
 ```
 CHANNEL_ACCESS_TOKEN=CHANNEL-ACCESS-TOKEN-OF-LINE-MESSAGING-API
 API_KEY=API-KEY-FROM-GOOGLE-AI-STUDIO
