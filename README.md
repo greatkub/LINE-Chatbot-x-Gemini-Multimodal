@@ -11,7 +11,7 @@ Building a LINE Chatbot for user chatting with a PDF, Image, Video, and Audio fi
 Copy credentials and set them in a `.env` file in the `functions` directory
 ```
 CHANNEL_ACCESS_TOKEN=CHANNEL-ACCESS-TOKEN-OF-LINE-MESSAGING-API
-API_KEY=API-KEY-FROM-GOOGLE-AI-STUDIO
+GEMINI_API_KEY=API-KEY-FROM-GOOGLE-AI-STUDIO
 ```
 
 ## Documentation
