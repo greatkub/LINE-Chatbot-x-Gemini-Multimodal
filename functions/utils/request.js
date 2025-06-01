@@ -1,11 +1,10 @@
 const axios = require("axios");
-const MESSAGING_API = "https://api.line.me/v2/bot";
 const LINE_HEADER = {
   "Content-Type": "application/json",
   Authorization: `Bearer ${process.env.CHANNEL_ACCESS_TOKEN}`
 };
 
-class LINE {
+class Request {
   getBinary(messageId) {
     return axios({
       method: "get",
@@ -18,7 +17,7 @@ class LINE {
   reply(replyToken, payload) {
     return axios({
       method: "post",
-      url: `${MESSAGING_API}/message/reply`,
+      url: "https://api.line.me/v2/bot/message/reply",
       headers: LINE_HEADER,
       data: { replyToken, messages: payload }
     });
@@ -27,11 +26,19 @@ class LINE {
   loading(userId) {
     return axios({
       method: "post",
-      url: `${MESSAGING_API}/chat/loading/start`,
+      url: "https://api.line.me/v2/bot/chat/loading/start",
       headers: LINE_HEADER,
       data: { chatId: userId }
     });
   }
+
+  async curl(url) {
+    try {
+      return axios({ method: "get", url, responseType: "arraybuffer" });
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
-module.exports = new LINE()
+module.exports = new Request()
