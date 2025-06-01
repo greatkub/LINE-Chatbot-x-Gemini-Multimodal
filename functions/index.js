@@ -15,6 +15,7 @@ exports.webhook = onRequest(async (req, res) => {
     const userId = event.source.userId;
     switch (event.type) {
       case "postback":
+        await line.loading(userId);
         const response = await line.getBinary(event.postback.data);
         if (response.status === 200) {
           await getReady(response, userId, event.replyToken);
@@ -22,9 +23,11 @@ exports.webhook = onRequest(async (req, res) => {
         break;
       case "message":
         const messageType = event.message.type;
-
         if (["image", "video", "audio"].includes(messageType)) {
+          
+          await line.loading(userId);
           const response = await line.getBinary(event.message.id);
+          
           if (response.status === 202) {
             await line.reply(event.replyToken, [{
               type: "text",
@@ -38,15 +41,18 @@ exports.webhook = onRequest(async (req, res) => {
             }]);
             break;
           }
+          
           if (response.status === 200) {
             await getReady(response, userId, event.replyToken);
             break;
           }
+
         }
         if (messageType === "text") {
           const prompt = event.message.text.trim();
-
+          
           if (gemini.isUrl(prompt)) {
+            await line.loading(userId);
             const response = await axios({ method: "get", url: prompt, responseType: "arraybuffer" });
             if (response.status === 200) {
               await getReady(response, userId, event.replyToken);
@@ -65,6 +71,7 @@ exports.webhook = onRequest(async (req, res) => {
             await line.reply(event.replyToken, [{ type: "text", text: `${response.text()}` }]);
             console.log("TotalToken:", response.usageMetadata.totalTokenCount);
           }
+
         }
         break;
     }
