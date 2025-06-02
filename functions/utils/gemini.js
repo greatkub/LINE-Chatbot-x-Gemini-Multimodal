@@ -2,10 +2,8 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
 class Gemini {
-  async multimodal(promptArray) {
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
-    const result = await model.generateContent(promptArray);
-    return result.response;
+  isUrl(str) {
+    return /^(http(s)?:\/\/)?(www\.)?[a-z0-9]+([-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/.test(str);
   }
 
   getMimeType(response) {
@@ -26,8 +24,10 @@ class Gemini {
     ].includes(mimeType);
   }
 
-  isUrl(str) {
-    return /^(http(s)?:\/\/)?(www\.)?[a-z0-9]+([-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/.test(str);
+  async multimodal(promptArray) {
+    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+    const result = await model.generateContent(promptArray);
+    return result.response;
   }
 }
 

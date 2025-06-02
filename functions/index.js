@@ -1,8 +1,8 @@
 const { onRequest } = require("firebase-functions/v2/https");
 const request = require("./utils/request");
-const gemini = require("./utils/gemini");
 const NodeCache = require("node-cache");
 const cache = new NodeCache();
+const gemini = require("./utils/gemini");
 
 exports.webhook = onRequest(async (req, res) => {
   if (req.method !== "POST") { return res.send(req.method); }
