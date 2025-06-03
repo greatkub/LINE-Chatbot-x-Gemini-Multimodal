@@ -67,7 +67,6 @@ exports.webhook = onRequest(async (req, res) => {
               prompt
             ]);
             await request.reply(event.replyToken, [{ type: "text", text: `${response.text}` }]);
-            console.log(response);
             console.log("TotalToken:", response.usageMetadata.totalTokenCount);
           }
         }
@@ -80,7 +79,6 @@ exports.webhook = onRequest(async (req, res) => {
 const getReady = async (response, userId, replyToken) => {
   let message = "ปัจจุบันฉันสามารถเข้าใจไฟล์ PDF, JPEG, PNG, WAV, MP3, MP4, และ MOV ได้เท่านั้น";
   const mimeType = gemini.getMimeType(response);
-  console.log("mimeType:", mimeType);
   if (gemini.isAllowedMimes(mimeType)) {
     const base64 = Buffer.from(response.data).toString('base64');
     cache.set(`${userId}`, { data: base64, mimeType });
