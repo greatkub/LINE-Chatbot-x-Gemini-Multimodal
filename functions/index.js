@@ -66,7 +66,8 @@ exports.webhook = onRequest(async (req, res) => {
               { inlineData: data },
               prompt
             ]);
-            await request.reply(event.replyToken, [{ type: "text", text: `${response.text()}` }]);
+            await request.reply(event.replyToken, [{ type: "text", text: `${response.text}` }]);
+            console.log(response);
             console.log("TotalToken:", response.usageMetadata.totalTokenCount);
           }
         }

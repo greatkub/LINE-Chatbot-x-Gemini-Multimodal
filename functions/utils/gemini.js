@@ -1,5 +1,5 @@
-const { GoogleGenerativeAI } = require("@google/generative-ai");
-const genAI = new GoogleGenerativeAI(process.env.API_KEY);
+const { GoogleGenAI } = require("@google/genai");
+const ai = new GoogleGenAI({ apiKey: `${process.env.API_KEY}` });
 
 class Gemini {
   isUrl(str) {
@@ -25,9 +25,11 @@ class Gemini {
   }
 
   async multimodal(promptArray) {
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
-    const result = await model.generateContent(promptArray);
-    return result.response;
+    const response = await ai.models.generateContent({
+      model: "gemini-2.0-flash",
+      contents: promptArray,
+    });
+    return response;
   }
 }
 
