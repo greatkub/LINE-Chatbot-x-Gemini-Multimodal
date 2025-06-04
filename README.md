@@ -18,3 +18,9 @@ GEMINI_API_KEY=API-KEY-FROM-GOOGLE-AI-STUDIO
 * [LINE Messaging API](https://developers.line.biz/en/docs/messaging-api/overview)
 * [Cloud Functions for Firebase](https://firebase.google.com/docs/functions/get-started)
 * [Gemini Developer API](https://ai.google.dev/gemini-api/docs/quickstart)
+
+## Blog
+[สร้าง LINE Chatbot ให้เข้าใจ PDF, Image, Video และ Audio ที่ผู้ใช้ส่งเข้ามา ด้วย Gemini และ Cloud Functions](https://medium.com/linedevth/b4e4f31fa9bc)
+
+## Example
+![สร้าง LINE Chatbot ให้เข้าใจ PDF, Image, Video และ Audio ที่ผู้ใช้ส่งเข้ามา ด้วย Gemini และ Cloud Functions](https://miro.medium.com/v2/resize:fit:4800/format:webp/1*-i-mcGTA6ajUGekJkNKStQ.png)
