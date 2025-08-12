@@ -1,0 +1,25 @@
+{
+  "name": "line-chatbot-gemini-azure",
+  "version": "1.0.0",
+  "description": "LINE Chatbot with Gemini Multimodal on Azure Functions",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "prestart": "npm run build",
+    "start": "func start",
+    "test": "echo \"No tests yet...\""
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@azure/functions": "^4.0.0",
+    "@google/genai": "^1.5.1",
+    "axios": "^1.10.0",
+    "node-cache": "^5.1.2"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "typescript": "^5.0.0"
+  }
+}

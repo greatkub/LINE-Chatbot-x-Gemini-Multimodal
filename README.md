@@ -1,26 +1,129 @@
-# LINE Chatbot x Gemini Multimodal
-Building a LINE Chatbot for user chatting with a PDF, Image, Video, and Audio files by Gemini and Cloud Functions for Firebase 
+# LINE Chatbot with Gemini Multimodal on Azure Functions
+
+A LINE chatbot that uses Google's Gemini AI to process multimodal content (images, videos, audio, PDFs) and answer questions about them.
+
+## Features
+
+- **Multimodal Processing**: Handles PDF, JPEG, PNG, WAV, MP3, MP4, and MOV files
+- **AI-Powered Responses**: Uses Google Gemini 2.5 Flash for intelligent content analysis
+- **LINE Integration**: Seamless integration with LINE messaging platform
+- **Azure Functions**: Serverless deployment on Microsoft Azure
+- **TypeScript**: Full TypeScript support with proper type definitions
+
+## Architecture
+
+- **Azure Functions**: Serverless compute for handling webhook requests
+- **Google Gemini AI**: Multimodal AI model for content analysis
+- **LINE Bot API**: Messaging platform integration
+- **Node.js**: Runtime environment with TypeScript support
+
+## Project Structure
+
+```
+├── src/
+│   ├── webhook/
+│   │   ├── function.json    # Azure Functions binding configuration
+│   │   └── index.ts         # Main webhook handler
+│   └── utils/
+│       ├── gemini.ts        # Gemini AI integration
+│       └── request.ts       # LINE API utilities
+├── host.json                # Azure Functions host configuration
+├── local.settings.json      # Local development settings
+├── package.json             # Dependencies and scripts
+├── tsconfig.json            # TypeScript configuration
+└── azure-deploy.md          # Deployment instructions
+```
 
 ## Prerequisites
-* [Node.js v20](https://nodejs.org) or higher
-* Create a channel and copy the channel access token from [LINE Developers console](https://developers.line.biz/en/docs/messaging-api/getting-started/)
-* Create a Firebase project using the [Firebase Console](https://console.firebase.google.com) and select <b>Blaze plan</b>
-* Create an API key from [Google AI Studio](https://aistudio.google.com/app/apikey)
 
-## Environment variables
-Copy credentials and set them in a `.env` file in the `functions` directory
+- Node.js 18+
+- Azure CLI
+- Azure Functions Core Tools
+- Google Gemini API key
+- LINE Channel Access Token
+
+## Quick Start
+
+1. **Clone and install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+2. **Configure environment variables**
+
+   - Copy `local.settings.json` and add your API keys
+   - Set `API_KEY` (Google Gemini)
+   - Set `CHANNEL_ACCESS_TOKEN` (LINE)
+
+3. **Build and run locally**
+
+   ```bash
+   npm run build
+   npm start
+   ```
+
+4. **Deploy to Azure**
+   ```bash
+   func azure functionapp publish your-function-app-name
+   ```
+
+## Configuration
+
+### Environment Variables
+
+- `API_KEY`: Your Google Gemini API key
+- `CHANNEL_ACCESS_TOKEN`: Your LINE Channel Access Token
+
+### LINE Webhook Setup
+
+1. Set your webhook URL in LINE Developer Console
+2. URL format: `https://your-function-app-name.azurewebsites.net/api/webhook`
+3. Enable webhook verification if required
+
+## API Endpoints
+
+- **POST** `/api/webhook` - Main webhook endpoint for LINE events
+
+## Supported File Types
+
+- **Documents**: PDF
+- **Images**: JPEG, PNG
+- **Audio**: WAV, MP3, M4A
+- **Video**: MP4, MOV
+
+## Development
+
+### Local Development
+
+```bash
+npm run build    # Build TypeScript
+npm start        # Start local development server
 ```
-CHANNEL_ACCESS_TOKEN=CHANNEL-ACCESS-TOKEN-OF-LINE-MESSAGING-API
-API_KEY=API-KEY-FROM-GOOGLE-AI-STUDIO
-```
 
-## Documentation
-* [LINE Messaging API](https://developers.line.biz/en/docs/messaging-api/overview)
-* [Cloud Functions for Firebase](https://firebase.google.com/docs/functions/get-started)
-* [Gemini Developer API](https://ai.google.dev/gemini-api/docs/quickstart)
+### Testing
 
-## Blog (Thai Language)
-[สร้าง LINE Chatbot ให้เข้าใจ PDF, Image, Video และ Audio ที่ผู้ใช้ส่งเข้ามา ด้วย Gemini และ Cloud Functions](https://medium.com/linedevth/b4e4f31fa9bc)
+- Use ngrok to expose localhost for LINE webhook testing
+- Test with various file types and text prompts
 
-## Example
-![สร้าง LINE Chatbot ให้เข้าใจ PDF, Image, Video และ Audio ที่ผู้ใช้ส่งเข้ามา ด้วย Gemini และ Cloud Functions](https://github.com/user-attachments/assets/e22bde0e-4517-4955-b041-085d1ab7ba4f)
+## Deployment
+
+See [azure-deploy.md](azure-deploy.md) for detailed deployment instructions.
+
+## Monitoring
+
+- Azure Application Insights integration
+- Function logs in Azure Portal
+- Performance metrics and error tracking
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

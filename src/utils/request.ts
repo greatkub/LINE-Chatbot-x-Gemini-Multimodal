@@ -1,38 +1,39 @@
-const axios = require("axios");
+import axios, { AxiosResponse } from "axios";
+
 const LINE_HEADER = {
   "Content-Type": "application/json",
-  Authorization: `Bearer ${process.env.CHANNEL_ACCESS_TOKEN}`
+  Authorization: `Bearer ${process.env.CHANNEL_ACCESS_TOKEN}`,
 };
 
-class Request {
-  getBinary(messageId) {
+export class Request {
+  async getBinary(messageId: string): Promise<AxiosResponse> {
     return axios({
       method: "get",
       headers: LINE_HEADER,
       url: `https://api-data.line.me/v2/bot/message/${messageId}/content`,
-      responseType: "arraybuffer"
+      responseType: "arraybuffer",
     });
   }
 
-  reply(replyToken, payload) {
+  async reply(replyToken: string, payload: any[]): Promise<AxiosResponse> {
     return axios({
       method: "post",
       url: "https://api.line.me/v2/bot/message/reply",
       headers: LINE_HEADER,
-      data: { replyToken, messages: payload }
+      data: { replyToken, messages: payload },
     });
   }
 
-  loading(userId) {
+  async loading(userId: string): Promise<AxiosResponse> {
     return axios({
       method: "post",
       url: "https://api.line.me/v2/bot/chat/loading/start",
       headers: LINE_HEADER,
-      data: { chatId: userId }
+      data: { chatId: userId },
     });
   }
 
-  async curl(url) {
+  async curl(url: string): Promise<AxiosResponse> {
     try {
       return axios({ method: "get", url, responseType: "arraybuffer" });
     } catch (error) {
@@ -41,4 +42,4 @@ class Request {
   }
 }
 
-module.exports = new Request()
+export const request = new Request();
